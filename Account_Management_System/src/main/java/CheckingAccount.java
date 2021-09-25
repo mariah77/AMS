@@ -11,7 +11,8 @@ public class CheckingAccount extends Account{
 	   total_tax = null;
 	   
    }
-   public void makeWithdrawal(int a) {
+   public boolean makeWithdrawal(int a) {
+	   boolean flag = false;
 	 if(login_status == true) {
 	   if(a>0) {
 	      if(a>balance) {
@@ -27,7 +28,7 @@ public class CheckingAccount extends Account{
 	    	  balance -=a;
 	        }
 	      track++;
-	      
+	      flag = true;
 	     }
 	   else {
 		   System.out.println("Withdrawal can't be made, withdrawal amount is negative");
@@ -37,6 +38,7 @@ public class CheckingAccount extends Account{
 		}
 		
 	 }
+	 return flag;
 	  
    }
    public void makeDeposit(int a) {
@@ -93,10 +95,10 @@ public class CheckingAccount extends Account{
 	   
    }
    
-   public void displayAllDeductions() {
-	   
-	 if(login_status == true) {
+   public int displayAllDeductions() {
 	   int total = 0;
+	 if(login_status == true) {
+	 
 	   for(int i = 0; i<size; i++) {
 		   int j=i+3;
 		   System.out.println("Tax Deduction for transaction "+ j +" : "+total_tax[i]);
@@ -105,14 +107,17 @@ public class CheckingAccount extends Account{
 	   }
 	   
 	 }
+	 return total;
    }
    
-   public void transferAmount(CheckingAccount b, int amount) {
+   public boolean transferAmount(CheckingAccount b, int amount) {
+	   boolean flag = false;
 	 if(login_status == true) {
 	   if(b.account_number != account_number) {
 			if(amount>0) {
 				b.setBalance(amount);
 				System.out.println("Amount succesfully transferred");
+				flag = true;
 			}
 			else {
 				System.out.println("Transfer can't be made");
@@ -124,15 +129,17 @@ public class CheckingAccount extends Account{
 		}
 	   
 	 }
+	 return flag;
 	   
    }
-   public void transferAmount(SavingsAccount b, int amount) {
-	   
+   public boolean transferAmount(SavingsAccount b, int amount) {
+	  boolean flag = false;
 	 if(login_status == true) {
 	   if(b.account_number != account_number) {
 			if(amount>0) {
 				b.setBalance(amount);
 				System.out.println("Amount succesfully transferred");
+				flag = true;
 			}
 			else {
 				System.out.println("Transfer can't be made");
@@ -144,6 +151,6 @@ public class CheckingAccount extends Account{
 		}
 	   
 	 }
-	   
+	   return flag;
    }
 }

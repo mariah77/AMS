@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 public class SavingsAccount extends Account {
 	
-	private static double interest_rate = 2.5;
+	private static double interest_rate = 2.0;
 	private double[] z;
 	private int index = 0;
 	public SavingsAccount(String n, String a, String p,String d) {
@@ -16,11 +16,13 @@ public class SavingsAccount extends Account {
 		}
 	}
 	
-	public void makeWithdrawal(int a) {
+	public boolean makeWithdrawal(int a) {
+		boolean flag = false; 
 		if(login_status == true) {
 		if(a>0 ) {
 			if(a<=balance) {
 				balance -=a;
+				flag= true;
 			}
 			else {
 				System.out.println("Withdrawal can't be made becasue withdrawal amount exceeds account balance");
@@ -32,6 +34,7 @@ public class SavingsAccount extends Account {
 		}
 		
 	   }
+		return flag;
 			
 	}
 	public void setInterestRate(double i) {
@@ -83,32 +86,41 @@ public class SavingsAccount extends Account {
                 
 		return days;
 	}
-	public void calculateInterest(String d2) {
+	public double calculateInterest(String d2) {
+		double amount = 0;
 	  if(login_status == true) {
 		long days = dateInput(date,d2);
 		double d = days /=365;
-		double amount = (d*interest_rate*balance)/100;
+		
+		amount = (d*interest_rate*balance)/100;
 		System.out.println("Total Interest : Rs "+ amount );
 		
 	  }
+	  return amount;
 	}
 	
-	public void calculateZakat() {
+	public double calculateZakat() {
+	  double zakat = 0;
 	  if(login_status == true) {
 		if(balance>= 20000) {
-			double zakat = (balance*2.5)/100;
+			
+			zakat = (balance*2.5)/100;
 			System.out.println("Zakat : Rs "+zakat);	
 			z[index] = zakat;
 			index++;
+			
 		}
 		else {
 			System.out.println("Balance less than Rs 20,000, not eligible for zakat");
+			
 		}
 		
 	  }
+	  return zakat;
+	  
 	}
 	
-	public void displayAllDeductions() {
+	public double[] displayAllDeductions() {
 	  if(login_status == true) {
 		printStatement();
 		for(int i = 0; i<index; i++) {
@@ -116,15 +128,19 @@ public class SavingsAccount extends Account {
 			System.out.println("Zakat Deduction "+ j +" : "+z[i]);
 		}
 		
+		
 	  }
+	  return z;
 		
 	}
-	public void transferAmount(CheckingAccount b, int amount) {
+	public boolean transferAmount(CheckingAccount b, int amount) {
+		boolean flag = false;
 		if(login_status == true) {
 		   if(b.account_number != account_number) {
 				if(amount>0) {
 					b.setBalance(amount);
 					System.out.println("Amount succesfully transferred");
+					flag = true;
 				}
 				else {
 					System.out.println("Transfer can't be made");
@@ -134,15 +150,19 @@ public class SavingsAccount extends Account {
 			else {
 				System.out.println("Transfer can't be made");
 			}
+		  
 		}
+		 return flag;
 		   
 	   }
-	   public void transferAmount(SavingsAccount b, int amount) {
+	   public boolean  transferAmount(SavingsAccount b, int amount) {
+		   boolean flag = false;
 		  if(login_status == true) {
 		   if(b.account_number != account_number) {
 				if(amount>0) {
 					b.setBalance(amount);
 					System.out.println("Amount succesfully transferred");
+					flag = true;
 				}
 				else {
 					System.out.println("Transfer can't be made");
@@ -153,6 +173,7 @@ public class SavingsAccount extends Account {
 				System.out.println("Transfer can't be made");
 			}
 		  }
+		  return flag;
 	   }
    
 }

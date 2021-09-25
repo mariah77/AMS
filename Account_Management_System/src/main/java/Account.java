@@ -34,10 +34,14 @@ public abstract class Account {
 		}
 	}
 	
-	public void checkBalance() {
+	public int checkBalance() {
 		if(login_status == true) {
 		  System.out.println("Name : "+ name);
 		  System.out.println("Current account balance : "+ balance);
+		  return balance;
+		}
+		else {
+			return 0;
 		}
 	}
 	public void makeDeposit(int a) {
@@ -53,7 +57,7 @@ public abstract class Account {
 	  }
 		
 	}
-	public abstract void makeWithdrawal(int a);
+	public abstract boolean makeWithdrawal(int a);
 	
 	public void transferAmount(Account b, int amount) {
 	  if(login_status == true) {

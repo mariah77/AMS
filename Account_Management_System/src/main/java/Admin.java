@@ -1,4 +1,4 @@
-
+import java.util.concurrent.TimeUnit;
 public class Admin {
 
 	private String name;
@@ -50,7 +50,8 @@ public class Admin {
 		
 	}
 	
-	public String getName() {
+	public String getName() throws InterruptedException {
+		TimeUnit.MILLISECONDS.sleep(500);
 		return name;
 		
 	}
@@ -58,14 +59,16 @@ public class Admin {
 		name =s;
 	}
 	
-	public String getAddress() {
+	public String getAddress()  throws InterruptedException{
+		TimeUnit.MILLISECONDS.sleep(500);
 		return address;
 	}
 	public void setAddress(String s) {
 		address = s;
 	}
 	
-	public String getPhone() {
+	public String getPhone()  throws InterruptedException{
+		TimeUnit.MILLISECONDS.sleep(500);
 		return phone_number;
 	}
 	public void setPhone(String s) {
@@ -91,12 +94,14 @@ public class Admin {
 			return null;
 		}
 	}
-	public void closeAccount(int c,int an) {
+	public boolean closeAccount(int c,int an) {
+		boolean flag = false;
         if(c == 1) {
         	if(sa!=null && sa.account_number == an) {
         		
         		sa = null;
         		System.out.println("Savings Account Successfully closed");
+        		flag = true;
         	}
         	else {
         		System.out.println("Savings Account doesnot exist");
@@ -106,11 +111,13 @@ public class Admin {
         	if(ca!=null && ca.account_number == an) {
         		ca = null;
         		System.out.println("Checking Account Successfully closed");
+        		flag = true;
         	}
         	else {
         		System.out.println("Checking Account doesnot exist");
         	}
         }
+        return flag;
 	}
 	
 }
