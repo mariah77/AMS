@@ -1,5 +1,7 @@
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -35,4 +37,11 @@ public class TimeoutTest {
 		user.setPhone("0514444899");
 		assertThat("0514444899", is(user.getPhone()));
 	}
+	@AfterClass 
+	public static void Destructor() {
+		user.closeAccount(2, 1000);
+		user.closeAccount(1, 1001);
+		user = null;
+	}
+	
 }
