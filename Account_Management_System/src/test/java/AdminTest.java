@@ -203,17 +203,17 @@ public class AdminTest {
 		  int x = user.getca().checkBalance();
 		  assertEquals(116000,x);
 		  
-	}*/
+	}
 	@Test// negative test case negative amount Deposited for checking account
 	public void Test19() {
 		
 		  user.getca().makeDeposit(-1000);
 		  int x = user.getca().checkBalance();
-		  assertEquals(/*131000*/60000,x);
+		  assertEquals(60000,x);//131000
 		  
-	}
+	}*/
 
-	@Test // test case for closing checking account
+ 	@Test // test case for closing checking account
 	public void Test20() {
 		boolean f = user.closeAccount(1, 1006);
 		assertFalse(f);
