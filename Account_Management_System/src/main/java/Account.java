@@ -25,6 +25,8 @@ public abstract class Account {
 	   
 		
 	   }
+	
+	//set balance
 	public void setBalance(int b) {
 		if(login_status == true) {
 		  if(b>0) {
