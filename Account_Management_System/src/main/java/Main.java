@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -271,7 +274,98 @@ public class Main {
 		}while(choice>=1 && choice<=7);
 
 				
-		cin.close();//closing scanner object
+		//cin.close();//closing scanner object
+		
+		
+		
+		
+		
+		MYSQLHandler mysql = new MYSQLHandler();
+		OracleDBHandler sql = new OracleDBHandler();
+		FileHandler f = new FileHandler();
+		
+		int choice1 = 0;
+		do {
+			System.out.println("1) Store data in file");
+			System.out.println("2) Store data in Oracle");
+			System.out.println("3) Store data in Mysql");
+			System.out.println("0) Exit");
+			System.out.println("Enter choice : ");
+			choice1 = cin.nextInt();
+			
+		  if(choice1 == 1) {
+			  try {
+				f.addcustomer(user.getName(), user.getAddress(), user.getPhone());
+				if(user.getsa()!=null) {
+					f.addsavingsaccount(user.getsa().getaccountnumber(), user.getName(), user.getsa().getInterestRate(), user.getsa().calculateZakat());
+				}
+				else {
+					System.out.println("Cannot insert data, savings account doesnot exist");
+				}
+				if(user.getca()!=null) {
+					f.addcheckingaccount(user.getca().getaccountnumber(), user.getName(), user.getca().gettransaction(), user.getca().gettot());
+				}
+				else {
+					System.out.println("Cannot insert data, checking account doesnot exist");
+				}
+			    } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			   }
+		  }
+				
+			  else if(choice1 == 2) {
+				  try {
+					sql.addcustomer(user.getName(), user.getAddress(), user.getPhone());
+					if(user.getsa()!=null) {
+						sql.addsavingsaccount(user.getsa().getaccountnumber(), user.getName(), user.getsa().getInterestRate(), user.getsa().calculateZakat());
+					}
+					else {
+						System.out.println("Cannot insert data, savings account doesnot exist");
+					}
+					if(user.getca()!=null) {
+						sql.addcheckingaccount(user.getca().getaccountnumber(), user.getName(), user.getca().gettransaction(), user.getca().gettot());
+					}
+					else {
+						System.out.println("Cannot insert data, checking account doesnot exist");
+					}
+				    } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				  
+				  
+		      }
+		  
+			  else if(choice1 == 3) {
+				  try {
+					mysql.addcustomer(user.getName(), user.getAddress(), user.getPhone());
+					if(user.getsa()!=null) {
+						mysql.addsavingsaccount(user.getsa().getaccountnumber(), user.getName(), user.getsa().getInterestRate(), user.getsa().calculateZakat());
+					}
+					else {
+						System.out.println("Cannot insert data, savings account doesnot exist");
+					}
+					if(user.getca()!=null) {
+						mysql.addcheckingaccount(user.getca().getaccountnumber(), user.getName(), user.getca().gettransaction(), user.getca().gettot());
+					}
+					else {
+						System.out.println("Cannot insert data, checking account doesnot exist");
+					}
+				    } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				  
+				  
+		      }
+				
+				
+			
+			
+		}while(choice1!=0);
+			
+		
 	}
 
 }

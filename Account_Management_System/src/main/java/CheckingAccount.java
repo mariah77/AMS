@@ -4,12 +4,13 @@ public class CheckingAccount extends Account{
    private static int transaction_fee = 10;
    private int[] total_tax;
    private int size;
+   private int tot;
    public CheckingAccount(String n, String a, String p,String d) {
 	   super(n,a,p,d);
 	   track = 0;
 	   size = 0;
 	   total_tax = null;
-	   
+	   tot = 0;
    }
    public boolean makeWithdrawal(int a) {
 	   boolean flag = false;
@@ -70,6 +71,14 @@ public class CheckingAccount extends Account{
 		 return 0;
 	 }
    }
+   public int gettransaction() {
+	   if(login_status==true) {
+		   return transaction_fee;
+	   }
+	   else {
+		   return 0;
+	   }
+   }
    
    private void calculateTax() {
 	   
@@ -80,6 +89,7 @@ public class CheckingAccount extends Account{
 		   total_tax = new int[size];
 		   for(int i =0; i<size; i++) {
 			   total_tax[i] = transaction_fee;
+			   tot+=transaction_fee;
 		   }
 	   }
 	   else {
@@ -88,11 +98,20 @@ public class CheckingAccount extends Account{
 		   total_tax = new int[size];
 		   for(int i=0; i<size; i++) {
 			   total_tax[i] = transaction_fee;
+			   tot+=transaction_fee;
 		   }
 	   }
 	   
 	 }
 	   
+   }
+   public int gettot() {
+	   if(login_status==true) {
+		   return tot;
+	   }
+	   else {
+		   return 0;
+	   }
    }
    
    public int displayAllDeductions() {

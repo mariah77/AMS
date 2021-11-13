@@ -36,5 +36,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver8"/>
+	<classpathentry kind="lib" path="C:/Users/USER/Downloads/MySqlJdbcDriver/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/Downloads/ojdbc11.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

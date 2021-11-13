@@ -59,6 +59,14 @@ public abstract class Account {
 	  }
 		
 	}
+	public int getaccountnumber() {
+		if(login_status == true) {
+		return account_number;
+		}
+		else {
+			return 0;
+		}
+	}
 	public abstract boolean makeWithdrawal(int a);
 	
 	public void transferAmount(Account b, int amount) {
